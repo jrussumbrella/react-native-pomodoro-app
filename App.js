@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Focus from "./src/features/focus/Focus";
-import { colors } from "./src/theme/colors";
+import { colors } from "./src/utils/colors";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import Timer from "./src/features/timer/Timer";
 
@@ -16,7 +16,7 @@ const theme = {
 };
 
 export default function App() {
-  const [focusSubject, setFocusSubject] = useState(null);
+  const [focusSubject, setFocusSubject] = useState("");
 
   const handleAddSubject = (value) => {
     setFocusSubject(value);
@@ -26,7 +26,11 @@ export default function App() {
     <PaperProvider theme={theme}>
       <SafeAreaView style={styles.container}>
         <StatusBar style="auto" />
-        {focusSubject ? <Timer /> : <Focus addSubject={handleAddSubject} />}
+        {focusSubject ? (
+          <Timer focusSubject={focusSubject} />
+        ) : (
+          <Focus addSubject={handleAddSubject} />
+        )}
       </SafeAreaView>
     </PaperProvider>
   );

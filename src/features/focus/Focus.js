@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { TextInput } from "react-native-paper";
-import RoundedButton from "../../components/RoundedButton";
+import { TextInput, Button } from "react-native-paper";
 import { IconButton } from "react-native-paper";
 
 const Focus = ({ addSubject }) => {
@@ -26,9 +25,13 @@ const Focus = ({ addSubject }) => {
           onChangeText={handleChangeText}
           style={styles.input}
         />
-        <RoundedButton onPress={handleAddSubject}>
-          <IconButton size={30} icon="plus" color="#fff" />
-        </RoundedButton>
+        <Button
+          mode="contained"
+          onPress={handleAddSubject}
+          style={styles.button}
+        >
+          Add
+        </Button>
       </View>
     </View>
   );
@@ -51,9 +54,17 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: "row",
+    height: 60,
   },
   input: {
     flex: 1,
     marginRight: 10,
+  },
+  button: {
+    width: 80,
+    height: "100%",
+    borderWidth: 1,
+    borderColor: "#fff",
+    justifyContent: "center",
   },
 });
