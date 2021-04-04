@@ -1,21 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import Focus from "./src/features/focus/Focus";
+import { colors } from "./src/theme/colors";
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import Timer from "./src/features/timer/Timer";
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: colors.primary,
+    accent: "yellow",
+  },
+};
 
 export default function App() {
+  const [focusSubject, setFocusSubject] = useState(null);
+
+  const handleAddSubject = (value) => {
+    setFocusSubject(value);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider theme={theme}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar style="auto" />
+        {focusSubject ? <Timer /> : <Focus addSubject={handleAddSubject} />}
+      </SafeAreaView>
+    </PaperProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: colors.primary,
   },
 });
